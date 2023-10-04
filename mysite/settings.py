@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'tpnfy8z8c*yjq+2v&ssy(x^*il)s9d@90bel^wa5(%wa9_#5_+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # 生产环境下需要修改DEBUG=False和ALLOW_HOSTS
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 注册应用:应用book文件夹下apps.py的BookConfig类
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,8 +57,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR,'templates')], # 初始为空，添加模板路径，使用模板文件时提供相对路径即可
+        'APP_DIRS': True, # True 表示会去搜索APP内同名的文件夹(这里为templates)
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -73,10 +76,21 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# 数据库引擎默认为sqlite，修改为MySQL
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # 数据库引擎
+        'HOST':'192.168.228.3',  # 数据库主机
+        'PORT':'3306',  #端口号
+        'USER':'liujian',  # 数据库用户名
+        'PASSWORD':'liujian420',  # 数据库用户密码
+        'NAME': 'mybook', # 数据库名字
     }
 }
 
@@ -103,9 +117,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans' # 简体中文
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai' # 时区
 
 USE_I18N = True
 
@@ -118,3 +134,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# 访问静态文件的URL前缀
+# 程序会查【各APP】中名为static文件夹(与STATIC_URL设置的名称无关，STATIC_URL只是为了给浏览器用)去寻找静态资源，
+# 记静态资源相对static文件夹的路径为<相对路径>，即静态资源在 【APP路径】/static/<相对路径>
+# 为以示区分，记 STATIC_URL = '/st1/'，相当于是各APP中的static文件夹的别名
+# 在浏览器中输入 http://127.0.0.1:8000/st1/<相对路径> 则可以访问相应静态资源
+# 注意，程序不会查Project目录下的static文件夹。
+
+# 新建 STATICFILES_DIRS 列表，存放查找静态文件的目录
+# 程序先查APP中的static文件夹, 再查STATICFILES_DIRS中给出的路径
+STATICFILES_DIRS = [
+    # 若这里给的本地路径是 dir1，要访问的静态资源在 dir1/<相对路径>
+    # 则浏览器中输入 http://127.0.0.1:8000/st1/<相对路径> 则可以访问相应静态资源
+    os.path.join(BASE_DIR, 'static'),
+]
