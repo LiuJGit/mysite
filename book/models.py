@@ -44,11 +44,15 @@ class BookInfo(models.Model):
         # 模型类如果未指明表名，Django默认以小写app应用名_小写模型类名为数据库表名。
         # 可通过db_table指明数据库表名。
         db_table='bookinfo' # 指定数据库表名
-        verbose_name='admin' # 在admin站点中显示的名称
+        verbose_name='书籍信息' # 在admin站点中显示的名称
 
 
     def __str__(self):
-        """定义每个数据对象的显示信息"""
+        """
+        定义每个数据对象的显示信息，比如：
+            - 查询到某条记录后，打印该条记录就会显示这里设定的值
+            - 站点管理查看数据时，每条记录显示的内容
+        """
         return self.name
     
 
