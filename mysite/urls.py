@@ -20,4 +20,9 @@ from django.conf.urls import url,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'book/', include('book.urls')), # book 子应用
+
+    # 子应用 app1，两个实例：author, publisher，测试 instance namespace
+    # url(r'author/', include('app1.urls', namespace='app1')), # instance namespace 与 app namespace 同名，相当于设置了 app namespace 的默认值
+    url(r'author/', include('app1.urls', namespace='app1_author')), # 这里设置的是 instance namespace
+    url(r'publisher/', include('app1.urls', namespace='app1_publisher')), # 若不存在 instance 与 app 同名的情况，则 app namespce 默认值为最后一个
 ]

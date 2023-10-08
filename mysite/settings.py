@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 注册应用:应用book文件夹下apps.py的BookConfig类
     'book.apps.BookConfig',
+    # 注册子应用 app1
+    'app1.apps.App1Config',
 ]
 
 MIDDLEWARE = [
