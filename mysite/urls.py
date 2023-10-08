@@ -19,5 +19,5 @@ from django.conf.urls import url,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^',include('book.urls')),
+    url(r'book/', include('book.urls')), # book 子应用
 ]
