@@ -35,20 +35,23 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions', # 相应的，会创建django_session表用于存储session数据
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 注册应用:应用book文件夹下apps.py的BookConfig类
     'book.apps.BookConfig',
     # 注册子应用 app1
     'app1.apps.App1Config',
+    # 注册子应用 app2
+    'app2.apps.App2Config',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     # session中间件，在操作session时会帮我们自动完成对cookie的操作(session是依赖于cookie的),这些对cookie的操作对我们而言是透明的
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware', # django 自带的防止csrf的中间件，我们先关闭
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

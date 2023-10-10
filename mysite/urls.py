@@ -25,4 +25,7 @@ urlpatterns = [
     # url(r'author/', include('app1.urls', namespace='app1')), # instance namespace 与 app namespace 同名，相当于设置了 app namespace 的默认值
     url(r'author/', include('app1.urls', namespace='app1_author')), # 这里设置的是 instance namespace
     url(r'publisher/', include('app1.urls', namespace='app1_publisher')), # 若不存在 instance 与 app 同名的情况，则 app namespce 默认值为最后一个
+
+    # 子应用 app2
+    url(r'app2/', include('app2.urls'))
 ]
