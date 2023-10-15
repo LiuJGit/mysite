@@ -73,3 +73,51 @@ def test_session(request):
     #     pass
     
     return HttpResponse('test_session')
+
+
+def B(request):
+    '''
+    能正常发起转账的页面
+    '''
+    response = render(request,'app2/B.html')
+    # 通过正常途径访问时设置一个cookie
+    # 若开启 django csrf 中间件，django 还会保证存在一个名为 csrftoken 的 cookie（不存在就新设置一个）
+    response.set_cookie('password','123')
+    return response
+
+
+def check_request(request):
+    '''
+    检查发送的请求的情况
+    '''
+    # print(f'----请求头----')
+    # print(request.headers)
+    # print(request.headers.get('Origin',None))
+
+    print('----请求携带的cookie----')
+    print(request.COOKIES)
+
+    print('----请求携带的数据----')
+    print('POST 携带的数据：', request.POST)
+
+    password = request.COOKIES.get('password', None)
+    if password:
+        # 关闭 django 的 csrf 中间件，
+        # 只要存在 password cookie 就能转账成功。
+        # 打开 django 的 csrf 的中间件，对于跨站点提交的请求，根本不允许访问；
+        # 但是，人为地在攻击网页 C 的表单中添加合法的 csrfmiddlewaretoken 
+        # (比如在浏览器中查看B页面的源码，就可以看到合法的 csrfmiddlewaretoken)，
+        # 再发起请求就可以通过 django 自带 csrf 中间件的检测了。
+        return HttpResponse('转账成功')
+
+        # # 若提交的表单带有 csrf token，并通过 cookie 中的 csrf token 的检验
+        # # 比如，二者相等，或其他的合法性校验（类似于公钥(cookie中的csrf token)和私钥(表单中的csrf token)是否匹配，
+        # # 则转账成功，否则是黑客攻击。
+        # # 这里为了方便，我们假设只要表单带有 csrf token 就通过了检验，因为正常情况下，黑客是拿不到表单中的 csrf token 的。
+        # # 这里相当于实现了一个简单的防止 csrf 的逻辑。
+        # if request.POST.get('csrfmiddlewaretoken'):
+        #     return HttpResponse('转账成功')
+        # else:
+        #     return HttpResponse('黑客攻击')
+    else:
+        return HttpResponse('请先登录')

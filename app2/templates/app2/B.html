@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>正常网页</title>
+</head>
+<body>
+    正常网页
+    <hr>
+    <div>
+        <form method="post" action="http://127.0.0.1:8000/app2/check_request/">
+            {% csrf_token %}
+            <input type="submit" value="转账">
+        </form>
+    </div>
+</body>
+</html>

@@ -10,4 +10,6 @@ urlpatterns = [
     url('index/', views.index, name='index'),
     url('test_cookie/', views.test_cookie, name='test_cookie'),
     url('test_session/', views.test_session, name='test_session'),
+    url('B/', views.B, name='B'),
+    url('check_request/', views.check_request, name='check_request'),
 ]
