@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # 数据库引擎
-        'HOST':'192.168.228.3',  # 数据库主机
+        'HOST':'192.168.241.3',  # 数据库主机: thinkbook(192.168.228.3), 台式机(192.168.241.3)
         'PORT':'3306',  #端口号
         'USER':'liujian',  # 数据库用户名
         'PASSWORD':'liujian420',  # 数据库用户密码
