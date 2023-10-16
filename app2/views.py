@@ -127,7 +127,9 @@ def check_request(request):
 class TestView(View):
 
     def get(self, request):
+        print('接收到get请求')
         return render(request, 'app2/view.html')
     
     def post(self, request):
+        print('接收到post请求')
         return HttpResponse('类视图：post 方法')
