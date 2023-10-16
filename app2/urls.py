@@ -13,4 +13,5 @@ urlpatterns = [
     url('B/', views.B, name='B'),
     url('check_request/', views.check_request, name='check_request'),
     url('test_view/', views.TestView.as_view(), name='test_view'),
+    url('test_tmp/', views.test_tmp, name='test_tmp'), # 测试模板继承
 ]

@@ -1,0 +1,18 @@
+{#把继承的模板写在最上边#}
+{% extends 'app2/base.html' %}
+
+
+{#需要改哪里，直接实现block#}
+{% block title %}
+    详情页面
+{% endblock %}
+
+
+{% block main %}
+    <h1>子模板新加内容</h1>
+    {{ block.super }}
+{% endblock main %}
+
+
+{#不需要某个block 直接重写#}
+{% block footer %}{% endblock %}

@@ -133,3 +133,7 @@ class TestView(View):
     def post(self, request):
         print('接收到post请求')
         return HttpResponse('类视图：post 方法')
+    
+
+def test_tmp(request):
+    return render(request, 'app2/extend.html')

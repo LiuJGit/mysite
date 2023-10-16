@@ -55,8 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'app2.middleware.my_middleware1', # 注册自定义中间件 my_middleware1
-    'app2.middleware.my_middleware2', # 注册自定义中间件 my_middleware2
+    # 'app2.middleware.my_middleware1', # 注册自定义中间件 my_middleware1
+    # 'app2.middleware.my_middleware2', # 注册自定义中间件 my_middleware2
 ]
 
 ROOT_URLCONF = 'mysite.urls'
