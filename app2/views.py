@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 import json
+from django.views import View
 
 # Create your views here.
 
@@ -121,3 +122,12 @@ def check_request(request):
         #     return HttpResponse('黑客攻击')
     else:
         return HttpResponse('请先登录')
+    
+
+class TestView(View):
+
+    def get(self, request):
+        return render(request, 'app2/view.html')
+    
+    def post(self, request):
+        return HttpResponse('类视图：post 方法')

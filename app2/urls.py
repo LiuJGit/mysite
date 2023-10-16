@@ -12,4 +12,5 @@ urlpatterns = [
     url('test_session/', views.test_session, name='test_session'),
     url('B/', views.B, name='B'),
     url('check_request/', views.check_request, name='check_request'),
+    url('test_view/', views.TestView.as_view(), name='test_view'),
 ]
