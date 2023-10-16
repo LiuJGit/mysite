@@ -57,11 +57,30 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'app2.middleware.my_middleware1', # 注册自定义中间件 my_middleware1
     # 'app2.middleware.my_middleware2', # 注册自定义中间件 my_middleware2
+    # 'mysite.middleware.my_middleware1', # 注册自定义中间件 my_middleware1，模块也可以放在项目文件夹下
+    # 'mysite.middleware.my_middleware2', # 注册自定义中间件 my_middleware2，模块也可以放在项目文件夹下
 ]
 
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
+    # 添加jinja2模板引擎，顺序在原始引擎 django.template.backends.django.DjangoTemplates 之前
+    # 不要删掉django自带的模板引擎，因为 the admin application 基于自带的模板引擎，否则会报错
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2', # jinja2模板引擎
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            # 不写时默认环境为 'environment':'jinja2.Environment',
+            'environment':'mysite.jinja2_env.environmnet',
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates')], # 初始为空，添加模板路径，使用模板文件时提供相对路径即可
@@ -93,7 +112,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # 数据库引擎
-        'HOST':'192.168.241.3',  # 数据库主机: thinkbook(192.168.228.3), 台式机(192.168.241.3)
+        'HOST':'192.168.228.3',  # 数据库主机: thinkbook(192.168.228.3), 台式机(192.168.241.3)
         'PORT':'3306',  #端口号
         'USER':'liujian',  # 数据库用户名
         'PASSWORD':'liujian420',  # 数据库用户密码

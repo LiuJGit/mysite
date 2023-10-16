@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 import json
 from django.views import View
+from datetime import datetime
 
 # Create your views here.
 
@@ -137,3 +138,20 @@ class TestView(View):
 
 def test_tmp(request):
     return render(request, 'app2/extend.html')
+
+def test_jj2(request):
+
+    context = {
+            'username':'mike',
+            'age':14,
+            'birthday':datetime.now(),
+            'firends':['tom','jack','rose'],
+            'money':{
+                '2019':12000,
+                '2020':18000,
+                '2021':25000,
+            },
+            'desc':'<script>alert("大帅哥")</script>'
+        }
+
+    return render(request, 'app2/jj2.html', context)

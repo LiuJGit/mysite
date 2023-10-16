@@ -14,4 +14,5 @@ urlpatterns = [
     url('check_request/', views.check_request, name='check_request'),
     url('test_view/', views.TestView.as_view(), name='test_view'),
     url('test_tmp/', views.test_tmp, name='test_tmp'), # 测试模板继承
+    url('test_jj2/', views.test_jj2, name='test_jj2'), # 测试jinja2模板
 ]
