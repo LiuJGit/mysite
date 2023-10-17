@@ -139,6 +139,25 @@ class TestView(View):
 def test_tmp(request):
     return render(request, 'app2/extend.html')
 
+
+def test_dtl(request):
+
+    context = {
+            'username':'mike',
+            'age':14,
+            'birthday':datetime.now(),
+            'firends':['tom','jack','rose'],
+            'money':{
+                '2019':12000,
+                '2020':18000,
+                '2021':25000,
+            },
+            'desc':'<script>alert("大帅哥")</script>'
+        }
+
+    return render(request, 'app2/dtl.html', context)
+
+
 def test_jj2(request):
 
     context = {
