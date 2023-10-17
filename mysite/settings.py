@@ -64,23 +64,23 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
-    # # 添加jinja2模板引擎，顺序在原始引擎 django.template.backends.django.DjangoTemplates 之前
-    # # 不要删掉django自带的模板引擎，因为 the admin application 基于自带的模板引擎，否则会报错
-    # {
-    #     'BACKEND': 'django.template.backends.jinja2.Jinja2', # jinja2模板引擎
-    #     'DIRS': [os.path.join(BASE_DIR,'templates')],
-    #     'APP_DIRS': True,
-    #     'OPTIONS': {
-    #         # 不写时默认环境为 'environment':'jinja2.Environment',
-    #         'environment':'mysite.jinja2_env.environmnet',
-    #         'context_processors': [
-    #             'django.template.context_processors.debug',
-    #             'django.template.context_processors.request',
-    #             'django.contrib.auth.context_processors.auth',
-    #             'django.contrib.messages.context_processors.messages',
-    #         ],
-    #     },
-    # },
+    # 添加jinja2模板引擎，顺序在原始引擎 django.template.backends.django.DjangoTemplates 之前
+    # 不要删掉django自带的模板引擎，因为 the admin application 基于自带的模板引擎，否则会报错
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2', # jinja2模板引擎
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'APP_DIRS': True, # 经过试验，发现和django自带模板的搜索策略不同，就算设置为 True 也不会去app文件夹中去寻找模板文件
+        'OPTIONS': {
+            # 不写时默认环境为 'environment':'jinja2.Environment',
+            'environment':'mysite.jinja2_env.environmnet', # 自定义环境，用于自定义jinja2过滤器或全局函数
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates')], # 初始为空，添加模板路径，使用模板文件时提供相对路径即可

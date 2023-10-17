@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jinja2</title>
+</head>
+
+<body>
+
+    {# jinja2 没有多行注释，只有单行注释 #}
+
+    <div>
+        <a href="#">{{ username }}</a>
+
+        <hr>
+        我的年龄是 {{ age }}
+
+        <hr>
+        我的朋友是 {{ firends }}
+        <br>
+        我的girl朋友是 {{ firends.2 }}
+
+        <hr>
+        我的年纪
+        {% if age > 10 %}
+        大于10岁
+        {% else %}
+        不大于10岁
+        {% endif %}
+    </div>
+
+
+    <div>
+        <hr>
+        <ul>
+            {# jinja2的loop.index对应django自带模板的forloop.counter #}
+            {% for item in firends %}
+            <li> {{ loop.index }} {{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+        {# jinja2 可以用点号语法来获取字典中的值，但这里key比较特殊，因此不能像DTL中使用 {{ money.2019 }} 来获取值， #}
+        {# 而是使用方括号 {{ money['2019'] }} #}
+        我第一年的月薪是 {{ money['2019'] }}
+
+        <hr>
+        {# jinja2 允许直接计算，DTL 不行 #}
+        1+2计算结果为 {{ 1+2 }}
+    </div>
+
+
+    <div>
+        <hr>
+        {# jinja2 本身也支持 length 过滤器 #}
+        我总共有{{ firends|length }}个朋友
+
+        <hr>
+        {# jinja2 本身的环境有 safe 过滤器 #}
+        我的简介见弹窗{{ desc|safe }}
+
+        <hr>
+        {# jinja2 本身的环境没有 date 过滤器 or 全局函数，需要我们在自定义环境中设置 #}
+        {# 注意过滤器与 DTL 中传参的方式不同：{{ birthday|date:'Y年 m月 d日' }} #}
+        {# 过滤器：我的生日是 {{ birthday|date('Y年 m月 d日') }} #}
+        {# 全局函数：我的生日是 {{ date(birthday,'Y年 m月 d日') }} #}
+        过滤器：我的生日是 {{ birthday|date('Y年 m月 d日') }}
+        <br>
+        全局函数：我的生日是 {{ date(birthday,'Y年 m月 d日') }}
+    </div>
+
+
+    <div>
+        <hr>
+        {# jinja2 本身的环境本身有 default 过滤器 #}
+        {# jinja2 中过滤器传参的方式也不同，对应的DTL中是 {{ abcde|default:'123' }} #}
+        jinja2 自带default过滤器 {{ abcde|default('123') }}
+        <br>
+        {# 也可以注册default全局函数，通过函数的形式来调用 #}
+        自定义default全局函数{{ default(abcde, '123') }}
+    </div>
+
+
+    <div>
+        <hr>
+        {# 自定义过滤器 udf1 #}
+        过滤器 udf1 {{ 'haha'|udf1 }}
+        <br>
+        {# 自定义全局函数 udf1 #}
+        全局函数 udf1 {{ udf1('haha') }}
+    </div>
+
+
+    <div>
+        <hr>
+        {# 自定义过滤器 add_numbers #}
+        过滤器 add_numbers {{ 1|add_numbers(2) }}
+        <br>
+        {# 自定义全局函数 add_numbers #}
+        全局函数 add_numbers {{ add_numbers(1,2) }}
+    </div>
+
+    
+</body>
+
+</html>

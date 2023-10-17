@@ -15,45 +15,55 @@
     你好，我是多行注释
     {% endcomment %}
 
-    <a href="#">{{ username }}</a>
+    <div>
+        <a href="#">{{ username }}</a>
 
-    <hr>
-    我的年龄是 {{ age }}
+        <hr>
+        我的年龄是 {{ age }}
 
-    <hr>
-    我总共有{{ firends|length }}个朋友
-    <br>
-    我的朋友是 {{ firends }}
-    <br>
-    我的girl朋友是 {{ firends.2 }}
+        <hr>
+        我的朋友是 {{ firends }}
+        <br>
+        我的girl朋友是 {{ firends.2 }}
 
-    <hr>
-    <ul>
-        {% for item in firends %}
-        <li>{{ forloop.counter }} {{ item }}</li>
-        {% endfor %}
-    </ul>
+        <hr>
+        我的年纪
+        {% if age > 10 %}
+        大于10岁
+        {% else %}
+        不大于10岁
+        {% endif %}
+    </div>
+    
 
-    <hr>
-    我的年纪
-    {% if age > 10 %}
-    大于10岁
-    {% else %}
-    不大于10岁
-    {% endif %}
+    <div>
+        <hr>
+        <ul>
+            {% for item in firends %}
+            <li>{{ forloop.counter }} {{ item }}</li>
+            {% endfor %}
+        </ul>
 
-    <hr>
-    我第一年的月薪是 {{ money.2019 }}
+        <hr>
+        我第一年的月薪是 {{ money.2019 }}
+    </div>
+    
 
-    <hr>
-    {# 过滤器的语法形式: {{变量|过滤器:'参数'}} #}
-    我是生日是 {{ birthday|date:'Y年 m月 d日' }}
+    <div>
+        <hr>
+        我总共有{{ firends|length }}个朋友
 
-    <hr>
-    我的简介见弹窗{{ desc|safe }}
+        <hr>
+        我的简介见弹窗{{ desc|safe }}
 
-    <hr>
-    没有定义的变量可以设置默认值{{ abcde|default:':~~~~~~' }}
+        <hr>
+        {# 过滤器的语法形式: {{变量|过滤器:参数}} #}
+        我是生日是 {{ birthday|date:'Y年 m月 d日' }}
+
+        <hr>
+        没有定义的变量可以设置默认值{{ abcde|default:':~~~~~~' }}
+    </div>
+
 
 </body>
 
