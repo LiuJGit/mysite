@@ -112,7 +112,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # 数据库引擎
-        'HOST':'192.168.241.3',  # 数据库主机: thinkbook(192.168.228.3), 台式机(192.168.241.3)
+        'HOST':'192.168.228.3',  # 数据库主机: thinkbook(192.168.228.3), 台式机(192.168.241.3)
         'PORT':'3306',  #端口号
         'USER':'liujian',  # 数据库用户名
         'PASSWORD':'liujian420',  # 数据库用户密码
@@ -120,6 +120,27 @@ DATABASES = {
     }
 }
 
+
+# 配置 caches 缓存
+CACHES = {
+    "default": { # 缓存别名
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://192.168.228.3:6379/0", # 0表示redis的0号数据库
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    "redis1": { # 缓存别名
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://192.168.228.3:6379/1", # 1表示redis的1号数据库
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache" # 使用缓存来保存session数据，默认是django.contrib.sessions.backends.db，即使用数据库来保存session数据
+SESSION_CACHE_ALIAS = "redis1" # 用于保存session数据的缓存别名，不写就是默认的 default
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

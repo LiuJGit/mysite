@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'publisher/', include('app1.urls', namespace='app1_publisher')), # 若不存在 instance 与 app 同名的情况，则 app namespce 默认值为最后一个
 
     # 子应用 app2
-    url(r'app2/', include('app2.urls'))
+    url(r'app2/', include('app2.urls')),
+    # 子应用 app3, 测试缓存, session redis
+    url(r'app3/', include('app3.urls')),
 ]
