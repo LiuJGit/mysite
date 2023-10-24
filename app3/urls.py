@@ -9,4 +9,6 @@ app_name = 'app3' # 设置 app namespace
 urlpatterns = [
     url(r'set_session/$',views.SetSession.as_view(), name='set_session'),
     url(r'get_session/$',views.GetSession.as_view(), name='get_session'),
+    url(r'login/$',views.LoginView.as_view(), name='login'),
+    url(r'rece/$',views.ReceiveView.as_view(), name='rece'),
 ]

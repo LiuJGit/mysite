@@ -28,6 +28,6 @@ urlpatterns = [
 
     # 子应用 app2
     url(r'app2/', include('app2.urls')),
-    # 子应用 app3, 测试缓存, session redis
+    # 子应用 app3, 测试 (1) 缓存 & session redis; (2) vue & axios
     url(r'app3/', include('app3.urls')),
 ]

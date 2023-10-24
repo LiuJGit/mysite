@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'app1.apps.App1Config',
     # 注册子应用 app2
     'app2.apps.App2Config',
+    # 注册子应用 app3
+    'app3.apps.App3Config'
 ]
 
 MIDDLEWARE = [

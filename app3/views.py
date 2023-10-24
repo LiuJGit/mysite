@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+import json
 
 # Create your views here.
 
@@ -41,3 +42,38 @@ class GetSession(View):
             print('----')
 
         return HttpResponse('get session')
+    
+
+class LoginView(View):
+
+    def get(self,request):
+
+        return render(request,'app3/login.html')
+
+    def post(self,request):
+        pass
+
+
+
+class ReceiveView(View):
+
+    def get(self,request):
+
+        data = request.GET
+        username = data.get('username')
+        password=data.get('password')
+
+        return JsonResponse({'info':{'username':username}})
+
+
+    def post(self,request):
+        
+        # request.POST只适用于以表单形式提交的数据，即Content-Type为application/x-www-form-urlencoded或multipart/form-data的请求。
+        # 它无法解析application/json类型的请求体。在这种情况下，可以使用request.body获取请求体的原始字节数据，
+        # 然后通过json.loads(request.body.decode())将其解码为Python对象。
+        # data = request.POST # 获取到空的 QueryDict
+        data=json.loads(request.body.decode())
+        username = data.get('username')
+        password = data.get('password')
+
+        return JsonResponse({'info':{'username':username}})
